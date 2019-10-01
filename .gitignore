@@ -5,4 +5,6 @@
 *.tfstate
 *.tfstate.*
 
-
+# variable file
+*.tfvars
+*.tfvars.*
