@@ -22,25 +22,36 @@ resource "digitalocean_droplet" "docker_swarm_manager" {
 
   provisioner "remote-exec" {
     script = "install-docker.sh"
+
+    connection {
+      type = "ssh"
+      host = "${digitalocean_droplet.docker_swarm_manager.ipv4_address}"
+    }
   }
 
   provisioner "remote-exec" {
     inline = [
       "docker swarm init --advertise-addr ${digitalocean_droplet.docker_swarm_manager.ipv4_address_private}"
     ]
+
+    connection {
+      type = "ssh"
+      host = "${digitalocean_droplet.docker_swarm_manager.ipv4_address}"
+    }
   }
 }
 
 data "external" "swarm_join_token" {
-  program = ["./join-tokens.sh"]
+  program = ["${path.module}/join-token.sh"]
   query = {
     host = "${digitalocean_droplet.docker_swarm_manager.ipv4_address}"
   }
 }
 
 resource "digitalocean_droplet" "docker_swarm_worker" {
-  count = 3
-  name = "docker-swarm-worker-${count.index}"
+  # count = 3
+  # name = "docker-swarm-worker-${count.index}"
+  name = "docker-swarm-worker"
   tags = ["${digitalocean_tag.docker_swarm_public.id}"]
   region = "${var.do_region}"
   size = "${var.do_droplet_size}"
@@ -50,12 +61,22 @@ resource "digitalocean_droplet" "docker_swarm_worker" {
 
   provisioner "remote-exec" {
     script = "install-docker.sh"
+
+    connection {
+      type = "ssh"
+      host = "${digitalocean_droplet.docker_swarm_worker.ipv4_address}"
+    }
   }
 
   provisioner "remote-exec" {
     inline = [
       "docker swarm join --token ${data.external.swarm_join_token.result.worker} ${digitalocean_droplet.docker_swarm_manager.ipv4_address_private}:2377"
     ]
+
+    connection {
+      type = "ssh"
+      host = "${digitalocean_droplet.docker_swarm_worker.ipv4_address}"
+    }
   }
 }
 
