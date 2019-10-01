@@ -31,3 +31,10 @@ public_key_path="PATH TO YOUR PUBLIC KEY FILE"
 ```
 
 ### Edit Deployment File
+
+
+
+
+```
+sudo apt install jq
+```
