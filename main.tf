@@ -2,13 +2,6 @@ provider "digitalocean" {
   token = "${var.do_token}"
 }
 
-data "external" "swarm_join_token" {
-  program = ["./get-join-tokens.sh"]
-  query = {
-    host = "${digitalocean_droplet.docker_swarm_manager.ipv4_address}"
-  }
-}
-
 resource "digitalocean_ssh_key" "default" {
   name = "${var.do_key_name}"
   public_key = "${file(var.public_key_path)}"
@@ -35,6 +28,13 @@ resource "digitalocean_droplet" "docker_swarm_manager" {
     inline = [
       "docker swarm init --advertise-addr ${digitalocean_droplet.docker_swarm_manager.ipv4_address_private}"
     ]
+  }
+}
+
+data "external" "swarm_join_token" {
+  program = ["./join-tokens.sh"]
+  query = {
+    host = "${digitalocean_droplet.docker_swarm_manager.ipv4_address}"
   }
 }
 
