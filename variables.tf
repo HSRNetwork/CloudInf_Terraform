@@ -24,5 +24,5 @@ variable "do_droplet_size" {
 
 variable "do_image" {
   description = "The image to use to initialize the droplets"
-  default = "ubuntu-16-04-x64"
+  default = "ubuntu-19-04-x64"
 }
