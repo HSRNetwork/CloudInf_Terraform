@@ -2,7 +2,10 @@
 Docker Swarm Cluster on Digital Ocean with Terraform
 
 ## Preparing
-
+For one of the bash scripts you have to install the following on your computer:
+```
+sudo apt install jq
+```
 ### DigitalOcean
 Before you can start with this lab you have to create a [DigitalOcean](https://m.do.co/c/2983f9d0dc6d) account. When you have created an account you have to generate an API token (make sure you enable read and write access). Please write down you API token because [DigitalOcean](https://m.do.co/c/2983f9d0dc6d) will not show you the token again.
 
@@ -23,18 +26,9 @@ git clone https://github.com/HSRNetwork/CloudInf_Terraform.git
 ```
 
 ## Exercise
-### Create the Terraform Variables File
 Create a new file named `terraform.tfvars` and add the following lines:
 ```
 do_token="YOUR DIGITALOCEAN API TOKEN"
 public_key_path="PATH TO YOUR PUBLIC KEY FILE"
 ```
-
-### Edit Deployment File
-
-
-
-
-```
-sudo apt install jq
-```
+Now you can solve the **TODOS** in the `main.tf` file.
