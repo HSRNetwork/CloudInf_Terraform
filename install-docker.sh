@@ -6,5 +6,5 @@ sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial ma
 sudo apt-get update
 apt-cache policy docker-engine
 sudo apt-get install -y docker-engine
-sudo apt-get install -y python-pip
-pip install docker-compose
+sudo apt-get install -y python3-pip
+pip3 install docker-compose
