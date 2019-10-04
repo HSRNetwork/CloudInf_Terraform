@@ -21,7 +21,7 @@ resource "digitalocean_droplet" "docker_swarm_manager" {
   private_networking = true
 
   provisioner "remote-exec" {
-    script = "install-docker.sh"
+    script = "scripts/install-docker.sh"
 
     connection {
       type = "ssh"
@@ -42,7 +42,7 @@ resource "digitalocean_droplet" "docker_swarm_manager" {
 }
 
 data "external" "swarm_join_token" {
-  program = ["${path.module}/join-token.sh"]
+  program = ["${path.module}/scripts/join-token.sh"]
   query = {
     host = digitalocean_droplet.docker_swarm_manager.ipv4_address
   }
@@ -59,7 +59,7 @@ resource "digitalocean_droplet" "docker_swarm_worker" {
   private_networking = true
 
   provisioner "remote-exec" {
-    script = "install-docker.sh"
+    script = "scripts/install-docker.sh"
 
     connection {
       type = "ssh"
