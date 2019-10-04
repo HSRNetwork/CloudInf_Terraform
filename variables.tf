@@ -1,4 +1,3 @@
-
 variable "do_token" {
   description = "Your Digital Ocean API token"
 }
@@ -9,20 +8,21 @@ variable "public_key_path" {
 
 variable "do_key_name" {
   description = "Name of the key on Digital Ocean"
-  default = "terraform"
+  default     = "terraform"
 }
 
 variable "do_region" {
   description = "The region slug to launch the Digital Ocean droplets in"
-  default = "nyc3"
+  default     = "nyc3"
 }
 
 variable "do_droplet_size" {
   description = "The size droplets to use for the manager and worker nodes"
-  default = "512mb"
+  default     = "512mb"
 }
 
 variable "do_image" {
   description = "The image to use to initialize the droplets"
-  default = "ubuntu-19-04-x64"
+  default     = "ubuntu-19-04-x64"
 }
+
