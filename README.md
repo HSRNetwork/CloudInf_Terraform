@@ -35,3 +35,6 @@ public_key_path="PATH TO YOUR PUBLIC KEY FILE"
 Issue `terraform init` to initialize the provider plugins.
 
 Now you can solve the **TODOS** in the `main.tf` file.
+
+## Cleanup
+To cleanup your DigitalOcean instrastructure, run `terraform destroy`.
