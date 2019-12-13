@@ -18,7 +18,7 @@ variable "do_region" {
 
 variable "do_droplet_size" {
   description = "The size droplets to use for the manager and worker nodes"
-  default     = "512mb"
+  default     = "1gb"
 }
 
 variable "do_image" {
